@@ -32,6 +32,8 @@ float h, s, v;
 float c, m, y;
 std::string choice;
 
+void readInput();
+
 /*
 Struct to hold data for object rendering.
 */
@@ -271,95 +273,14 @@ void glutKeyboard (unsigned char keycode, int x, int y)
   case 27: // ESC
     glutDestroyWindow ( glutID );
     return;
-    
-  case '+':
-    // do something
-    break;
-  case '-':
-    // do something
-    break;
-  case 'x':
-    // do something
-    break;
-  case 'y':
-    // do something
-    break;
-  case 'z':
-    // do something
-    break;
+  case 'c':
+      readInput();
+      initQuad();
+	break;
   }
   glutPostRedisplay();
 }
 
-void readInput() {
-	std::cout << "Wollen sie RGB, CMY oder HSV eingeben?" << std::endl;
-    std::cin >> choice;
-    if (choice == "RGB" || choice == "rgb") {
-        std::cout << "Bitte geben Sie die RGB-Werte ein:" << std::endl;
-        std::cout << "R:" << std::endl;
-        std::cin >> r;
-        std::cout << "G:" << std::endl;
-        std::cin >> g;
-        std::cout << "B:" << std::endl;
-        std::cin >> b;
-        //check if values are in range
-        if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1) {
-            std::cout << "Die Werte müssen zwischen 0 und 1 liegen." << std::endl;
-            return;
-        }
-        else {
-            //speichern der rgb Werte
-            r = r;
-            g = g;
-            b = b;
-        }
-        
-	}
-    else if (choice == "HSV" || choice == "hsv") {
-      std::cout << "Bitte geben Sie die HSV-Werte ein:" << std::endl;
-      std::cout << "H:" << std::endl;
-      std::cin >> h;
-      std::cout << "S:" << std::endl;
-      std::cin >> s;
-      std::cout << "V:" << std::endl;
-      std::cin >> v;
-      //check if values are in range
-      if (h < 0 || h > 360 || s < 0 || s > 1 || v < 0 || v > 1) {
-          std::cout << "Die Werte müssen zwischen 0 und 360 für H und zwischen 0 und 1 für S und V liegen." << std::endl;
-          return;
-      }
-      else {
-          //speichern der hsv Werte
-          h = h;
-          s = s;
-          v = v;
-      }
-	}
-    else if (choice == "CMY" || choice == "cmy") {
-    		std::cout << "Bitte geben Sie die CMY-Werte ein:" << std::endl;
-            std::cout << "C:" << std::endl;
-		    std::cin >> c;
-		    std::cout << "M:" << std::endl;
-		    std::cin >> m;
-		    std::cout << "Y:" << std::endl;
-		    std::cin >> y;
-		//check if values are in range
-        if (c < 0 || c > 1 || m < 0 || m > 1 || y < 0 || y > 1) {
-			std::cout << "Die Werte müssen zwischen 0 und 1 liegen." << std::endl;
-			return;
-		}
-        else {
-			//speichern der cmy Werte
-			c = c;
-            m = m;
-            y = y;
-		}
-    }
-    else {
-		std::cout << "Ungültige Eingabe." << std::endl;
-		return;
-	}
-}
 
 void rgbToCmy(float r, float g, float b) {
     // Berechne CMY-Werte
@@ -467,23 +388,100 @@ void cmyToRgb(float c, float m, float y) {
 	std::cout << "RGB: " << r << ", " << g << ", " << b << std::endl;
 }
 
+
+void readInput() {
+    std::cout << "Wollen sie RGB, CMY oder HSV eingeben?" << std::endl;
+    std::cin >> choice;
+    if (choice == "RGB" || choice == "rgb") {
+        std::cout << "Bitte geben Sie die RGB-Werte ein:" << std::endl;
+        std::cout << "R:" << std::endl;
+        std::cin >> r;
+        std::cout << "G:" << std::endl;
+        std::cin >> g;
+        std::cout << "B:" << std::endl;
+        std::cin >> b;
+        //check if values are in range
+        if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1) {
+            std::cout << "Die Werte müssen zwischen 0 und 1 liegen." << std::endl;
+            readInput();
+            return;
+        }
+        else {
+            //speichern der rgb Werte
+            r = r;
+            g = g;
+            b = b;
+        }
+
+    }
+    else if (choice == "HSV" || choice == "hsv") {
+        std::cout << "Bitte geben Sie die HSV-Werte ein:" << std::endl;
+        std::cout << "H:" << std::endl;
+        std::cin >> h;
+        std::cout << "S:" << std::endl;
+        std::cin >> s;
+        std::cout << "V:" << std::endl;
+        std::cin >> v;
+        //check if values are in range
+        if (h < 0 || h > 360 || s < 0 || s > 1 || v < 0 || v > 1) {
+            std::cout << "Die Werte müssen zwischen 0 und 360 für H und zwischen 0 und 1 für S und V liegen." << std::endl;
+            readInput();
+            return;
+        }
+        else {
+            //speichern der hsv Werte
+            h = h;
+            s = s;
+            v = v;
+        }
+    }
+    else if (choice == "CMY" || choice == "cmy") {
+        std::cout << "Bitte geben Sie die CMY-Werte ein:" << std::endl;
+        std::cout << "C:" << std::endl;
+        std::cin >> c;
+        std::cout << "M:" << std::endl;
+        std::cin >> m;
+        std::cout << "Y:" << std::endl;
+        std::cin >> y;
+        //check if values are in range
+        if (c < 0 || c > 1 || m < 0 || m > 1 || y < 0 || y > 1) {
+            std::cout << "Die Werte müssen zwischen 0 und 1 liegen." << std::endl;
+            readInput();
+            return;
+        }
+        else {
+            //speichern der cmy Werte
+            c = c;
+            m = m;
+            y = y;
+        }
+    }
+    else {
+        std::cout << "Ungültige Eingabe." << std::endl;
+        readInput();
+        return;
+    }
+
+    //Umrechnungen je nach Eingabe
+    if (choice == "RGB" || choice == "rgb") {
+        rgbToCmy(r, g, b);
+        rgbToHsv(r, g, b);
+    }
+    else if (choice == "HSV" || choice == "hsv") {
+        hsvToRgb(h, s, v);
+        hsvToCmy(h, s, v);
+    }
+    else if (choice == "CMY" || choice == "cmy") {
+        cmyToRgb(c, m, y);
+    }
+    
+}
+
 int main(int argc, char** argv)
 {
   //Einlesen der user input
   readInput();
-  //Umrechnungen je nach Eingabe
-  if (choice == "RGB" || choice == "rgb") {
-      rgbToCmy(r, g, b);
-      rgbToHsv(r, g, b);
-  }
-  else if (choice == "HSV" || choice == "hsv") {
-      hsvToRgb(h, s, v);
-      hsvToCmy(h, s, v);
-  }
-  else if (choice == "CMY" || choice == "cmy") {
-      cmyToRgb(c, m, y);
-  }
-
+  
 
   // GLUT: Initialize freeglut library (window toolkit).
   glutInitWindowSize    (WINDOW_WIDTH, WINDOW_HEIGHT);
