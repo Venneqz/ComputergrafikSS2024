@@ -9,7 +9,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "GLSLProgram.h"
-#include "GLTools.h"
 
 // Fenstergröße
 const int WINDOW_WIDTH = 640;
@@ -17,9 +16,7 @@ const int WINDOW_HEIGHT = 480;
 
 // GLUT Fenster-ID
 int glutID = 0;
-
 cg::GLSLProgram program;
-
 glm::mat4x4 view;
 glm::mat4x4 projection;
 
@@ -163,3 +160,4 @@ int main(int argc, char** argv) {
     glutMainLoop();
     return 0;
 }
+
